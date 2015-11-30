@@ -27,8 +27,8 @@ public class Cipher {
 
     public void encodeMessage() {
         for (char c : message.toCharArray())
-            if (Character.isWhitespace(c)){
-                encodedMessage += " ";
+            if ((!(Character.isLetter(c)))){
+                    encodedMessage += c;
             } else {
                 if (Character.isUpperCase(c)) {
                     encodedMessage += encodeBoundCheckCapitalLetters(c);
@@ -62,8 +62,8 @@ public class Cipher {
 
     public void decodeMessage() {
         for (char c : message.toCharArray())
-            if (Character.isWhitespace(c)){
-                decodedMessage += " ";
+            if (!(Character.isLetter(c))){
+                decodedMessage += c;
             } else {
                 if (Character.isUpperCase(c)) {
                     decodedMessage += decodeBoundCheckCapitalLetters(c);
@@ -94,19 +94,5 @@ public class Cipher {
         }
         return c -= keyShift;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
