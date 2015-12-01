@@ -43,7 +43,7 @@ public class Cipher {
         if (check > MAX_CAPITAL_ASCII){
             c += keyShift;
             c -= MAX_CAPITAL_ASCII;
-            c += MIN_CAPITAL_ASCII;
+            c += MIN_CAPITAL_ASCII - 1;
             return c;
         }
         return c += keyShift;
@@ -54,7 +54,7 @@ public class Cipher {
         if (check > MAX_SMALL_ASCII){
             c += keyShift;
             c -= MAX_SMALL_ASCII;
-            c += MIN_SMALL_ASCII;
+            c += MIN_SMALL_ASCII - 1;
             return c;
         }
         return c += keyShift;
@@ -78,7 +78,7 @@ public class Cipher {
         if (check < MIN_CAPITAL_ASCII){
             c -= keyShift;
             c = (char) (MIN_CAPITAL_ASCII - c);
-            c = (char) (MAX_CAPITAL_ASCII - c);
+            c = (char) (MAX_CAPITAL_ASCII - c + 1);
             return c;
         }
         return c -= keyShift;
@@ -89,7 +89,7 @@ public class Cipher {
         if (check < MIN_SMALL_ASCII){
             c -= keyShift;
             c = (char) (MIN_SMALL_ASCII - c);
-            c = (char) (MAX_SMALL_ASCII - c);
+            c = (char) (MAX_SMALL_ASCII - c + 1);
             return c;
         }
         return c -= keyShift;
