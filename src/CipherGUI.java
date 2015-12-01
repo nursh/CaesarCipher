@@ -19,6 +19,7 @@ public class CipherGUI extends Application {
     private Label message;
     private Label modifiedMessage;
     private Label keyShift;
+    private Label error;
     private TextField messageField;
     private TextField modifiedMessageField;
     private TextField key;
@@ -37,6 +38,7 @@ public class CipherGUI extends Application {
         message = new Label("Enter your message: ");
         modifiedMessage = new Label("Encrypted / Decrypted Message");
         keyShift = new Label("key (0-25)");
+        error = new Label();
 
         messageField = new TextField();
         modifiedMessageField = new TextField();
@@ -50,18 +52,29 @@ public class CipherGUI extends Application {
         encrypt.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
-                Cipher cp = new Cipher(Integer.parseInt(key.getText()),messageField.getText());
-                cp.encodeMessage();
-                modifiedMessageField.setText(cp.getEncodedMessage());
+                try {
+                    error.setText("");
+                    Cipher cp = new Cipher(Integer.parseInt(key.getText()), messageField.getText());
+                    cp.encodeMessage();
+                    modifiedMessageField.setText(cp.getEncodedMessage());
+                }catch (IllegalArgumentException iae){
+                    error.setText(iae.getMessage());
+                }
+
             }
         });
 
         decrypt.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
+                try {
+                    error.setText("");
                 Cipher cp = new Cipher(Integer.parseInt(key.getText()),messageField.getText());
                 cp.decodeMessage();
                 modifiedMessageField.setText(cp.getDecodedMessage());
+                } catch (IllegalArgumentException iae){
+                    error.setText(iae.getMessage());
+                }
             }
         });
 
@@ -77,7 +90,7 @@ public class CipherGUI extends Application {
 
         VBox vb3 = new VBox();
         vb3.setPadding(new Insets(5));
-        vb3.getChildren().addAll(keyShift, key);
+        vb3.getChildren().addAll(keyShift, key,error);
 
         VBox vb2 = new VBox();
         vb2.setSpacing(10);

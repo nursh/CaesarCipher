@@ -11,6 +11,7 @@ public class Cipher {
     private String decodedMessage;
 
     public Cipher(int keyShift, String message) {
+        if(keyShift < 0 || keyShift > 25) throw new IllegalArgumentException("That number is not allowed");
         this.keyShift = keyShift;
         this.message = message;
         this.decodedMessage = "";
