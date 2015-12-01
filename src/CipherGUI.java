@@ -14,17 +14,13 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 public class CipherGUI extends Application {
 
     private Label message;
     private Label modifiedMessage;
     private Label keyShift;
     private TextField messageField;
-    private TextField modifiecMessageField;
+    private TextField modifiedMessageField;
     private TextField key;
     private Button encrypt;
     private Button decrypt;
@@ -43,11 +39,11 @@ public class CipherGUI extends Application {
         keyShift = new Label("key (0-25)");
 
         messageField = new TextField();
-        modifiecMessageField = new TextField();
+        modifiedMessageField = new TextField();
         key = new TextField();
         key .setPrefWidth(2);
         messageField.setPrefColumnCount(40);
-        modifiecMessageField.setPrefColumnCount(40);
+        modifiedMessageField.setPrefColumnCount(40);
 
         encrypt = new Button("Encrypt");
         decrypt = new Button("Decrypt");
@@ -56,7 +52,7 @@ public class CipherGUI extends Application {
             public void handle(javafx.event.ActionEvent event) {
                 Cipher cp = new Cipher(Integer.parseInt(key.getText()),messageField.getText());
                 cp.encodeMessage();
-                modifiecMessageField.setText(cp.getEncodedMessage());
+                modifiedMessageField.setText(cp.getEncodedMessage());
             }
         });
 
@@ -65,7 +61,7 @@ public class CipherGUI extends Application {
             public void handle(javafx.event.ActionEvent event) {
                 Cipher cp = new Cipher(Integer.parseInt(key.getText()),messageField.getText());
                 cp.decodeMessage();
-                modifiecMessageField.setText(cp.getDecodedMessage());
+                modifiedMessageField.setText(cp.getDecodedMessage());
             }
         });
 
@@ -74,7 +70,7 @@ public class CipherGUI extends Application {
         vb.getChildren().addAll(message, messageField);
 
         VBox vb1 = new VBox();
-        vb1.getChildren().addAll(modifiedMessage, modifiecMessageField);
+        vb1.getChildren().addAll(modifiedMessage, modifiedMessageField);
 
         VBox vb4 = new VBox();
         vb4.getChildren().addAll(vb, vb1);
